@@ -25,37 +25,68 @@
         
         <!-- Card Row -->
         <div class="row">
-            <div class="col-md-3">
-            <div class="card text-white bg-primary mb-4">
+            <div class="col-md-4">
+            <div class="btn mb-2 mb-md-0 btn-outline-quarternary btn-block">
                 <div class="card-body">
-                <h5 class="card-title">Users</h5>
-                <p class="card-text">2,345</p>
+                <h5 class="card-title">پولسازی</h5>
+                <p class="card-text">دوره روانشناسی پول و ثروت</p>
                 </div>
             </div>
             </div>
-            <div class="col-md-3">
-            <div class="card text-white bg-success mb-4">
+            <div class="col-md-4">
+            <div class="btn mb-2 mb-md-0 btn-outline-secondary btn-block">
                 <div class="card-body">
-                <h5 class="card-title">Revenue</h5>
-                <p class="card-text">$4,567</p>
+                <h5 class="card-title">تصاعد</h5>
+                <p class="card-text">دوره تصاعد</p>
                 </div>
             </div>
             </div>
-            <div class="col-md-3">
-            <div class="card text-white bg-warning mb-4">
+            <div class="col-md-4">
+            <div class="btn mb-2 mb-md-0 btn-outline-tertiary btn-block">
                 <div class="card-body">
-                <h5 class="card-title">Orders</h5>
-                <p class="card-text">745</p>
+                <h5 class="card-title">کریپتو</h5>
+                <p class="card-text">دوره کامل کریپتو </p>
                 </div>
             </div>
             </div>
-            <div class="col-md-3">
-            <div class="card text-white bg-danger mb-4">
-                <div class="card-body">
-                <h5 class="card-title">Issues</h5>
-                <p class="card-text">13</p>
+           
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card shadow-lg rounded border-0" style="width: 100%; max-width: 22rem;">
+                    <div class="card-body text-center p-4">
+                        <h5 class="card-title font-weight-bold">Beautiful Card Title</h5>
+                        <h6 class="card-subtitle mb-3 text-muted">Subtitle here</h6>
+                        <p class="card-text text-secondary">This is a beautifully designed card that can showcase your content in a stylish way. Add your description here to make it informative and engaging.</p>
+                        
+                    </div>
                 </div>
+
             </div>
+            <div class="col-md-4">
+                <div class="card shadow-lg rounded border-0" style="width: 100%; max-width: 22rem;">
+                    <div class="card-body text-center p-4">
+                        <h5 class="card-title font-weight-bold">Beautiful Card Title</h5>
+                        <h6 class="card-subtitle mb-3 text-muted">Subtitle here</h6>
+                        <p class="card-text text-secondary">This is a beautifully designed card that can showcase your content in a stylish way. Add your description here to make it informative and engaging.</p>
+                        
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-lg rounded border-0" style="width: 100%; max-width: 22rem;">
+                    <div class="card-body text-center p-4">
+                        <h5 class="card-title font-weight-bold">Beautiful Card Title</h5>
+                        <h6 class="card-subtitle mb-3 text-muted">Subtitle here</h6>
+                        <p class="card-text text-secondary">This is a beautifully designed card that can showcase your content in a stylish way. Add your description here to make it informative and engaging.</p>
+                        
+                    </div>
+                </div>
+
             </div>
         </div>
     

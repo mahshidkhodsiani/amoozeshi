@@ -48,3 +48,30 @@ body {
   }
 }
 
+
+
+.btn-outline-quarternary {
+  color: #4d0951 !important;
+  border: 1px solid #4d0951 !important;
+  background-color: transparent !important;
+}
+
+.btn-outline-quarternary:hover {
+  color: hsl(0, 0%, 100%) !important;
+  background-color: #4d0951 !important;
+  border-color: #4d0951 !important;
+}
+.btn-outline-tertiary {
+  color: #b79d0b !important;
+  border: 1px solid #b79d0b !important;
+  background-color: transparent !important;
+}
+
+.btn-outline-tertiary:hover {
+  color: hsl(0, 0%, 100%) !important;
+  background-color: #b79d0b !important;
+  border-color: #b79d0b !important;
+}
+
+
+
