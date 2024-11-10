@@ -1,52 +1,65 @@
 
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f6f9;
-}
+/* Sidebar */
 .sidebar {
-  height: 100vh;
-  background-color: #343a40;
-  padding-top: 20px;
   position: fixed;
-  right: 0;
   top: 0;
+  right: 0;
+  bottom: 0;
   width: 250px;
+  background-color: #343a40;
+  color: white;
+  transition: all 0.3s ease;
+  padding-top: 60px;
 }
 .sidebar a {
-  color: #adb5bd;
-  padding: 10px 15px;
+  color: white;
+  padding: 15px;
+  text-decoration: none;
   display: block;
-  font-size: 1.1em;
-  transition: color 0.3s;
+  font-size: 18px;
 }
 .sidebar a:hover {
-  color: #ffffff;
-  background-color: #495057;
+  background-color: #575757;
 }
-.sidebar a.active {
-  color: #ffff00; /* Change active color to yellow */
-  background-color: #495057;
+.sidebar .active {
+  background-color: #28a745;
 }
-.topbar {
-  background-color: #ffffff;
-  padding: 10px;
-  border-bottom: 1px solid #e0e0e0;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+.sidebar .close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(100%);
+    z-index: 999;
+  }
+  .sidebar.show {
+    transform: translateX(0);
+  }
 }
 .content {
-  margin-right: 250px; /* Pushes the content to make space for the sidebar on the right */
+  margin-right: 250px;
   padding: 20px;
 }
 @media (max-width: 768px) {
-  .sidebar {
-    display: none;
-  }
   .content {
     margin-right: 0;
   }
 }
+
+
+
+
+.sidebar a.active {
+  color: #ffff00; /* Change active color to yellow */
+  background-color: #495057;
+}
+
 
 
 
@@ -72,6 +85,3 @@ body {
   background-color: #b79d0b !important;
   border-color: #b79d0b !important;
 }
-
-
-

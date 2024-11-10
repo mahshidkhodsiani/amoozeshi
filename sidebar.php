@@ -5,44 +5,59 @@
     text-align: right; /* Align text to the right */
 }
 
-.sidebar h3 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #fff; /* Adjust text color if necessary */
+/* Active link style */
+.sidebar a.active {
+    color: #ffff00; 
+    background-color: #495057;
 }
-
-.sidebar-link {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start; /* Align items from right to left */
-    padding: 10px 15px;
-    color: #fff;
-    text-decoration: none;
-}
-
-.sidebar-link i {
-    margin-right: 8px; /* Space between icon and text */
-    margin-left: 0; /* No space on the left side */
-}
-
-/* Active link styling */
-.sidebar-link.active {
-    color: green;
-    font-weight: bold;
-}
-
-/* Hover styling */
-.sidebar-link:hover {
-    color: #ccc;
-}
-
 
 </style>
-<div class="sidebar">
-    <h3 class="text-white  mb-4">Admin Panel</h3>
-    <a href="index.php" data-page="index" class="sidebar-link"><i class="fa fa-home"></i> داشبورد</a>
-    <a href="courses.php" data-page="courses" class="sidebar-link"><i class="fa fa-chalkboard"></i> آموزش ها</a>
-    <a href="user.php" data-page="user" class="sidebar-link"><i class="fa fa-user"></i> پروفایل</a>
-    <a href="reports.php" data-page="reports" class="sidebar-link"><i class="fa fa-chart-line"></i> پورسانت ها</a>
-    <a href="settings.php" data-page="settings" class="sidebar-link"><i class="fa fa-cog"></i> تنظیمات</a>
+
+
+
+<div class="sidebar" id="sidebar">
+    <span class="close-btn" onclick="toggleSidebar()">×</span>
+    <a href="index.php" class="sidebar-link">داشبورد</a>
+    <a href="courses.php" class="sidebar-link">آموزش ها</a>
+    <a href="user.php" class="sidebar-link">پروفایل</a>
 </div>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Get the current page's filename from the URL
+    const currentPage = window.location.pathname.split('/').pop();
+
+    // Get all sidebar links
+    const sidebarLinks = document.querySelectorAll('.sidebar .sidebar-link');
+
+    // Loop through each link and set the active class based on the current page
+    sidebarLinks.forEach(link => {
+        // If the link's href matches the current page, add 'active' class
+        if (link.getAttribute('href').split('/').pop() === currentPage) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
+    });
+
+    // Add event listener to update active class on click
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            // Remove 'active' class from all links
+            sidebarLinks.forEach(link => link.classList.remove('active'));
+            
+            // Add 'active' class to the clicked link
+            this.classList.add('active');
+        });
+    });
+});
+
+</script>
+
+<script>
+    // Toggle sidebar on small screens
+    function toggleSidebar() {
+    document.getElementById("sidebar").classList.toggle("show");
+    }   
+</script>
