@@ -85,3 +85,44 @@
   background-color: #b79d0b !important;
   border-color: #b79d0b !important;
 }
+
+
+/* برای درخت معرفی */
+.tree {
+  font-family: Arial, sans-serif;
+}
+
+.tree-item {
+  padding: 5px 0;
+  margin-left: 20px;
+  position: relative;
+}
+
+.tree-item::before {
+  content: '';
+  position: absolute;
+  top: 15px;
+  left: -20px;
+  border-left: 2px solid #ccc;
+  height: 100%;
+}
+
+.tree-item::after {
+  content: '';
+  position: absolute;
+  top: 15px;
+  left: -20px;
+  border-top: 2px solid #ccc;
+  width: 20px;
+}
+
+.tree-node {
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+}
+
+.tree-branch {
+  margin-left: 15px;
+  color: #555;
+}

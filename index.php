@@ -23,7 +23,7 @@
    <div class="content">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <button class="btn btn-outline-light d-lg-none" onclick="toggleSidebar()">☰</button>
-        <a class="navbar-brand" href="#">برند</a>
+        <h5 class="navbar-brand" >روش های پولسازی</h5>
         </nav>
     
   
