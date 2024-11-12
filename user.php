@@ -124,13 +124,11 @@
 
 
             <hr>
-            <div class="row mt-5 ">
-                <div class="col-md-7"></div>
-                <div class="col-md-5">
-                    <h2 style="color: green;">درخت ارجاع</h2>
-                    <br>
-                   
-             
+            
+            <div class="col-md-5">
+                <h2 style="color: green;">درخت ارجاع</h2>
+                <br>
+
                 <?php
                     // این تابع برای دریافت افرادی که هر کاربر معرفی کرده است استفاده می‌شود.
                     function get_invited_people($user_id, $conn) {
@@ -149,7 +147,12 @@
                     }
 
                     // نمایش درخت
-                    function display_tree($user_id, $conn) {
+                    function display_tree($user_id, $conn, $level = 1) {
+                        // محدود کردن به 4 سطح
+                        if ($level > 4) {
+                            return; // توقف بازگشت
+                        }
+
                         // دریافت اطلاعات کاربر
                         $sql = "SELECT * FROM user WHERE id = " . $user_id;
                         $result = $conn->query($sql);
@@ -157,7 +160,7 @@
                         
                         // نمایش کاربر
                         echo '<div class="tree-item">';
-                        echo '<span class="tree-node" onclick="toggleInvited(' . $user["id"] . ')">' . "" . $user["name"] . '</span>';
+                        echo '<span class="tree-node" onclick="toggleInvited(' . $user["id"] . ')">' . $user["name"] . '</span>';
                         
                         // دریافت افرادی که این کاربر معرفی کرده است
                         $invited_people = get_invited_people($user_id, $conn);
@@ -165,7 +168,7 @@
                         if (count($invited_people) > 0) {
                             echo '<div class="tree-branch" id="invited-' . $user["id"] . '" style="display: none;">';
                             foreach($invited_people as $invited) {
-                                display_tree($invited['id'], $conn); // نمایش افرادی که این کاربر معرفی کرده است به صورت بازگشتی
+                                display_tree($invited['id'], $conn, $level + 1); // ارسال سطح به تابع
                             }
                             echo '</div>';
                         } else {
@@ -179,10 +182,7 @@
                     echo '<div class="tree">';
                     display_tree(1, $conn); // تغییر به شناسه کاربری که می‌خواهید از آن شروع کنید
                     echo '</div>';
-                    ?>
-                </div>
-               
-              
+                ?>
             </div>
             
         </div>

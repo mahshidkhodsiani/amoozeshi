@@ -42,6 +42,7 @@
                         <div class="card-body">
                         <h5 class="card-title">پولسازی</h5>
                         <p class="card-text">دوره روانشناسی پول و ثروت</p>
+                        <p class="card-text">8 جلسه صوتی</p>
                         </div>
                     </div>
                 </div>
@@ -50,6 +51,7 @@
                         <div class="card-body">
                         <h5 class="card-title">تصاعد</h5>
                         <p class="card-text">دوره تصاعد</p>
+                        <p class="card-text">8 جلسه تصویری</p>
                         </div>
                     </div>
                 </div>
@@ -57,7 +59,8 @@
                     <div class="btn mb-2 mb-md-0 btn-outline-tertiary btn-block">
                         <div class="card-body">
                         <h5 class="card-title">کریپتو</h5>
-                        <p class="card-text">دوره کامل کریپتو </p>
+                        <p class="card-text">آموزش 0 تا 100 بازار مالی</p>
+                        <p class="card-text">30 جلسه</p>
                         </div>
                     </div>
                 </div>
