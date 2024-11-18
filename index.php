@@ -77,7 +77,7 @@ if(!isset($_SESSION['user_data'])){
 
             <br>
 
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-md-4">
                     <div class="card shadow-lg rounded border-0" style="width: 100%; max-width: 22rem;">
                         <div class="card-body text-center p-4">
@@ -111,7 +111,7 @@ if(!isset($_SESSION['user_data'])){
                     </div>
 
                 </div>
-            </div>
+            </div> -->
 
 
 

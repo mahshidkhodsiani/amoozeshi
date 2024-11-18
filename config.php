@@ -1,8 +1,8 @@
 <?php
-// $servername = "89.32.250.180";
-// $username = "vuqgpgoc_admin";
-// $password = "ZKdN]DZ1kEuJ";
-// $dbname = "vuqgpgoc_simorgh";
+// $servername = "188.212.22.179";
+// $username = "uogsncxd_admin";
+// $password = "HlVAj$03N{VB";
+// $dbname = "uogsncxd_db";
 
 // $cfg['Lang'] = 'fa';
 // $cfg['Charset'] = 'utf8mb4';

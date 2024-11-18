@@ -5,6 +5,7 @@ if(!isset($_SESSION['user_data'])){
     header('location: login.php');
     exit();
 }
+$id = $_SESSION['user_data']['id'];
 ?>
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
@@ -87,7 +88,7 @@ if(!isset($_SESSION['user_data'])){
 
                 <div class="col-md-5" style="text-align: right !important;">
                     <?php
-                    $sql = "SELECT * FROM user WHERE id = 1";
+                    $sql = "SELECT * FROM user WHERE id = $id";
                     
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
@@ -98,7 +99,7 @@ if(!isset($_SESSION['user_data'])){
                     <div class="card" style="width: 18rem;">
                       <div class="card-body">
                         <h5 class="card-title">کد معرفی من</h5>
-                        <p class="card-text" id="invitedCode">' . $row['invited_code'] . '</p>
+                        <p class="card-text" id="invitedCode">' . $row['referral_code'] . '</p>
                         <button class="btn mb-2 mb-md-0 btn-outline-quarternary btn-block" onclick="copyCode()">کپی کد</button>
                       </div>
                     </div>
@@ -188,7 +189,7 @@ if(!isset($_SESSION['user_data'])){
 
                     // شروع نمایش درخت از کاربر با شناسه 1 (می‌توانید شناسه کاربر مورد نظر خود را تغییر دهید)
                     echo '<div class="tree">';
-                    display_tree(1, $conn); // تغییر به شناسه کاربری که می‌خواهید از آن شروع کنید
+                    display_tree($id, $conn); // تغییر به شناسه کاربری که می‌خواهید از آن شروع کنید
                     echo '</div>';
                 ?>
             </div>

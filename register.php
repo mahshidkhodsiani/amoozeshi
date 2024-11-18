@@ -90,8 +90,9 @@ include "functions.php";
 
 if(isset($_POST['register'])){
 
-  // invited کدی هست که از یکی گرفته برای ثبت نام
+ 
   $invited = $_POST['invited'];
+    
 
   $name = $_POST['name'];
   $family = $_POST['family'];
@@ -109,9 +110,27 @@ if(isset($_POST['register'])){
  
   $stmt = $conn->prepare($sql);
   $stmt->bind_param("sssssss", $name, $family, $invited, $refferal, $email, $username, $password);
+ 
+
 
  
   if ($stmt->execute()) {
+    $last = $conn->insert_id;
+    if(isset($_POST['invited'])){
+      $invited = $_POST['invited'];
+      $search = "SELECT * FROM user WHERE referral_code = '$invited'";
+      
+      $res = $conn->query($search);
+
+      if($res->num_rows > 0){
+        $row1 = $res->fetch_assoc();
+        $id1 = $row1['id'];
+        $insert = "INSERT INTO invited (user_id, invited_id) VALUES ('$id1', '$last')";
+
+        $conn->query($insert);
+      }
+    }
+
     echo "<div id='successToast' class='toast' role='alert' aria-live='assertive' aria-atomic='true' data-delay='3000' style='position: fixed; bottom: 20px; right: 20px; width: 300px;'>
         <div class='toast-header bg-success text-white'>
             <strong class='mr-auto'>Success</strong>
