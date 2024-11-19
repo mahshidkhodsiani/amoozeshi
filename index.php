@@ -5,6 +5,8 @@ if(!isset($_SESSION['user_data'])){
     header('location: login.php');
     exit();
 }
+$id = $_SESSION['user_data']['id']; 
+$admin = $_SESSION['user_data']['admin'];
 ?>
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">

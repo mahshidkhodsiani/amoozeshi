@@ -14,13 +14,31 @@
 </style>
 
 
+<?php
+if($admin == 1){
+
+?>
 
 <div class="sidebar" id="sidebar">
     <span class="close-btn" onclick="toggleSidebar()">×</span>
     <a href="index.php" class="sidebar-link">داشبورد</a>
     <a href="courses.php" class="sidebar-link">آموزش ها</a>
     <a href="user.php" class="sidebar-link">پروفایل</a>
+    <a href="users.php" class="sidebar-link">مدیریت کابران</a>
 </div>
+
+<?php
+}else{
+?>
+<div class="sidebar" id="sidebar">
+    <span class="close-btn" onclick="toggleSidebar()">×</span>
+    <a href="index.php" class="sidebar-link">داشبورد</a>
+    <a href="courses.php" class="sidebar-link">آموزش ها</a>
+    <a href="user.php" class="sidebar-link">پروفایل</a>
+</div>
+<?php
+}
+?>
 
 
 <script>

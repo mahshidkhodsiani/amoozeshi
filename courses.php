@@ -5,6 +5,9 @@ if(!isset($_SESSION['user_data'])){
     header('location: login.php');
     exit();
 }
+$id = $_SESSION['user_data']['id'];
+$admin = $_SESSION['user_data']['admin'];
+
 ?>
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
@@ -37,8 +40,19 @@ if(!isset($_SESSION['user_data'])){
         <div class="container">
             <div class="container">
         
-                <div class="row">
-                    <h2 class="">آموزش ها</h2>
+                <div class="row mt-2">
+                    <div class="col-md-6" style="text-align: right;">
+                        <h2 class="">آموزش ها</h2>
+                    </div>
+                    <?php
+                    if($admin == 1){
+                        ?>
+                        <div class="col-md-6">
+                            <a href="upload" class="btn mb-2 mb-md-0 btn-outline-quarternary">اپلود فایل جدید</a>
+                        </div>
+                        <?php
+                    }
+                    ?>
                 </div>
             
 
@@ -53,7 +67,7 @@ if(!isset($_SESSION['user_data'])){
 
                                 <h6 class="card-subtitle mb-3 text-muted">دوره روانشناسی پول و ثروت </h6>
                                 <p class="card-text text-secondary">دوره روانشناسی پول و ثروت با هدف درک بهتر ارتباط ذهن و پول، به شما کمک می‌کند تا موانع ذهنی و الگوهای فکری محدودکننده را شناسایی کرده و آن‌ها را برای دستیابی به موفقیت مالی و افزایش ثروت تغییر دهید. این دوره با استفاده از تکنیک‌های علمی و عملی، راهکارهایی برای تحول مالی و زندگی بهتر ارائه می‌دهد.</p>
-                                <a class="btn mb-2 mb-md-0 btn-outline-tertiary ">دیدن دوره</a>
+                                <a href="course.php?num=1" class="btn mb-2 mb-md-0 btn-outline-tertiary ">دیدن دوره</a>
                             </div>
                         </div>
 
@@ -67,7 +81,7 @@ if(!isset($_SESSION['user_data'])){
 
                                 <h6 class="card-subtitle mb-3 text-muted">دوره تصاعد مالی</h6>
                                 <p class="card-text text-secondary">دوره تصاعد مالی با تمرکز بر رشد و بهبود مهارت‌های مالی، به شما می‌آموزد که چگونه درآمد خود را به‌صورت مداوم افزایش دهید و به استقلال مالی نزدیک شوید. در این دوره، با تکنیک‌های پیشرفته و استراتژی‌های کاربردی، یاد می‌گیرید که سرمایه‌گذاری‌ها و منابع مالی خود را مدیریت کرده و مسیر موفقیت مالی را با اطمینان بیشتری طی کنید.</p>
-                                <a class="btn mb-2 mb-md-0 btn-outline-tertiary ">دیدن دوره</a>
+                                <a href="course.php?num=2" class="btn mb-2 mb-md-0 btn-outline-tertiary ">دیدن دوره</a>
                                 
                             </div>
                         </div>
@@ -82,7 +96,7 @@ if(!isset($_SESSION['user_data'])){
 
                                 <h6 class="card-subtitle mb-3 text-muted">دوره کریپتو کارنسی</h6>
                                 <p class="card-text text-secondary">دوره کریپتوکارنسی شما را با دنیای ارزهای دیجیتال آشنا می‌کند و اصول اولیه، تحلیل بازار، و روش‌های سرمایه‌گذاری هوشمند را به شما آموزش می‌دهد. در این دوره، علاوه بر آشنایی با مفاهیم پایه مانند بلاکچین و نحوه کارکرد ارزهای دیجیتال، یاد می‌گیرید چگونه ریسک‌ها را مدیریت کرده و بهترین تصمیمات را در بازار پرنوسان کریپتو بگیرید.</p>
-                                <a class="btn mb-2 mb-md-0 btn-outline-tertiary ">دیدن دوره</a>
+                                <a href="course.php?num=3" class="btn mb-2 mb-md-0 btn-outline-tertiary ">دیدن دوره</a>
                                 
                             </div>
                         </div>
