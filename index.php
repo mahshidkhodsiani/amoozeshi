@@ -32,8 +32,9 @@ $admin = $_SESSION['user_data']['admin'];
    <!-- Main content -->
    <div class="content">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <button class="btn btn-outline-light d-lg-none" onclick="toggleSidebar()">☰</button>
-        <h5 class="navbar-brand" >روش های پولسازی</h5>
+            <button class="btn btn-outline-light d-lg-none" onclick="toggleSidebar()">☰</button>
+            <h5 class="navbar-brand" >روش های پولسازی</h5>
+         
         </nav>
     
   

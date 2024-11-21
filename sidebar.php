@@ -15,12 +15,15 @@
 
 
 <?php
+include "functions.php";
+
 if($admin == 1){
 
 ?>
 
 <div class="sidebar" id="sidebar">
     <span class="close-btn" onclick="toggleSidebar()">×</span>
+    <span><?=get_name($id)?></span>
     <a href="index.php" class="sidebar-link">داشبورد</a>
     <a href="courses.php" class="sidebar-link">آموزش ها</a>
     <a href="user.php" class="sidebar-link">پروفایل</a>
@@ -32,6 +35,7 @@ if($admin == 1){
 ?>
 <div class="sidebar" id="sidebar">
     <span class="close-btn" onclick="toggleSidebar()">×</span>
+    <span><?=get_name($id)?></span>
     <a href="index.php" class="sidebar-link">داشبورد</a>
     <a href="courses.php" class="sidebar-link">آموزش ها</a>
     <a href="user.php" class="sidebar-link">پروفایل</a>

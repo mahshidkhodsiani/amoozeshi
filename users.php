@@ -67,7 +67,6 @@ $admin = $_SESSION['user_data']['admin'];
     include "sidebar.php"; 
     include "includes.php";  
     include "config.php";
-    include "functions.php";
     ?>
 
 

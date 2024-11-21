@@ -38,34 +38,35 @@
               </div>
               <!-- Email input -->
               <div data-mdb-input-init class="form-outline mb-4">
-                <input type="text" id="form3Example3" name="invited" class="form-control form-control-lg" placeholder="Enter invited" />
+                <label>کد معرفی</label>
+                <input type="text" id="form3Example3" name="invited" class="form-control form-control-lg" placeholder="Enter invited" >
               </div>
               <!-- Email input -->
                <div data-mdb-input-init class="form-outline mb-4">
-                <input type="text" id="form3Example3" name="name" class="form-control form-control-lg" placeholder="Enter name" />
+                <input type="text" id="form3Example3" name="name" class="form-control form-control-lg" placeholder="Enter name" required >
               </div>
               <!-- Email input -->
               <div data-mdb-input-init class="form-outline mb-4">
-                <input type="text" id="form3Example3" name="family" class="form-control form-control-lg" placeholder="Enter family" />
+                <input type="text" id="form3Example3" name="family" class="form-control form-control-lg" placeholder="Enter family" required >
               </div>
               <!-- Email input -->
               <div data-mdb-input-init class="form-outline mb-4">
-                <input type="text" id="form3Example3" name="email" class="form-control form-control-lg" placeholder="Enter email" />
+                <input type="text" id="form3Example3" name="email" class="form-control form-control-lg" placeholder="Enter email" required >
               </div>
               <!-- Email input -->
               <div data-mdb-input-init class="form-outline mb-4">
-                <input type="text" id="form3Example3" name="username" class="form-control form-control-lg" placeholder="Enter username" />
+                <input type="text" id="form3Example3" name="username" class="form-control form-control-lg" placeholder="Enter username" required >
                 
               </div>
               <!-- Password input -->
               <div data-mdb-input-init class="form-outline mb-3">
-                <input type="password" id="form3Example4" name="password" class="form-control form-control-lg" placeholder="Enter password" />
+                <input type="password" id="form3Example4" name="password" class="form-control form-control-lg" placeholder="Enter password" required >
             
               </div>
               <div class="d-flex justify-content-between align-items-center">
                 <!-- Checkbox -->
                 <div class="form-check mb-0">
-                  <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
+                  <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" required >
                   <label class="form-check-label" for="form2Example3"> Remember me </label>
                 </div>
                

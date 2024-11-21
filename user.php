@@ -67,7 +67,6 @@ $admin = $_SESSION['user_data']['admin'];
     include "sidebar.php"; 
     include "includes.php";  
     include "config.php";
-    include "functions.php";
     ?>
 
 
@@ -195,6 +194,8 @@ $admin = $_SESSION['user_data']['admin'];
                     echo '</div>';
                 ?>
             </div>
+
+
             
         </div>
     </div>
