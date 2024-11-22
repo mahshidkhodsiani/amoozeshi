@@ -123,12 +123,37 @@ if(isset($_POST['register'])){
       
       $res = $conn->query($search);
 
+
+     
+      // میدونم پیچیدس اما یکبار بخونی میفهمی
       if($res->num_rows > 0){
         $row1 = $res->fetch_assoc();
         $id1 = $row1['id'];
         $insert = "INSERT INTO invited (user_id, invited_id) VALUES ('$id1', '$last')";
-
         $conn->query($insert);
+
+        $profit1 = "INSERT INTO profits (user_id, profit, created_at) VALUES ($id1, 40, NOW())";
+        $result1 = $conn->query($profit1);
+        if($result1){
+          $sql2 = "SELECT * FROM invited WHERE invited_id = $id1";
+          $res2 = $conn->query($sql2);
+          if($res2->num_rows > 0){
+            $row2 = $res2->fetch_assoc();
+            $id2 = $row2['user_id'];
+            $profit2 = "INSERT INTO profits (user_id, profit, created_at) VALUES ($id2, 30, NOW())";
+            $result2 = $conn->query($profit2);
+            if($result2){
+              $sql3 = "SELECT * FROM invited WHERE invited_id = $id2";
+              $res3 = $conn->query($sql3);
+              if($res3->num_rows > 0){
+                $row3 = $res3->fetch_assoc();
+                $id3 = $row3['user_id'];
+                $profit3 = "INSERT INTO profits (user_id, profit, created_at) VALUES ($id3, 10, NOW())";
+                $result3 = $conn->query($profit3);
+              }
+            }
+          }
+        }
       }
     }
 

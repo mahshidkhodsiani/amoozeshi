@@ -14,7 +14,7 @@ $admin = $_SESSION['user_data']['admin'];
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Beautiful Admin Panel</title>
+  <title>مدیریت کاربران</title>
   <link rel="stylesheet" href="css/mainstyles.css">
 
 
@@ -72,10 +72,7 @@ $admin = $_SESSION['user_data']['admin'];
 
   <!-- Main content -->
   <div class="content">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <button class="btn btn-outline-light d-lg-none" onclick="toggleSidebar()">☰</button>
-      <h5 class="navbar-brand" >روش های پولسازی</h5>
-    </nav>
+    <?php include "header.php"; ?>
 
     <!-- Main Content -->
     <div class="container">
@@ -102,8 +99,8 @@ $admin = $_SESSION['user_data']['admin'];
             ?>
 
             <div class="row mt-5">
-                <div class="col-md-5" style="text-align: right !important;">
-                    <table class="table">
+                <div class="col-md-6" style="text-align: right !important;">
+                    <table class="table border">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
@@ -123,9 +120,18 @@ $admin = $_SESSION['user_data']['admin'];
                                         <td><?= $row['name'] . " " . $row['family'] ?></td>
                                         <td><?= $row['admin'] ?></td>
                                         <td>
-                                            <form action="" method="POST" onsubmit="return confirmDelete()">
+                                            <form action="" method="POST">
                                                 <input type="hidden" name="user_id" value="<?= $row['id'] ?>" />
-                                                <button class="btn btn-danger btn-sm" name="delete">حذف</button>
+                                                <button class="btn btn-danger btn-sm" name="delete" onclick="confirmDelete()">حذف</button>
+                                                <?php
+                                                if($row['confirm'] == 0) {
+                                                ?>
+                                                    <button class="btn btn-success btn-sm" name="confirm">تایید دوره ها</button>
+                                                <?php
+                                                }else{
+                                                    echo "تایید شده" ;
+                                                }
+                                                ?>
                                             </form>
                                         </td>
                                     </tr>
@@ -248,4 +254,51 @@ if (isset($_POST['delete'])) {
       </script>";
     }
 
+}
+
+if(isset($_POST['confirm'])){
+    $user_id = $_POST['user_id'];
+    $sql = "UPDATE user SET confirm = 1 WHERE id = $user_id";
+
+    if($conn->query($sql)){
+        echo "<div id='successToast' class='toast' role='alert' aria-live='assertive' aria-atomic='true' data-delay='3000' style='position: fixed; bottom: 20px; right: 20px; width: 300px;'>
+        <div class='toast-header bg-success text-white'>
+            <strong class='mr-auto'>Success</strong>
+        </div>
+        <div class='toast-body'>
+            اکانت با موفقیت تایید شد!
+        </div>
+        </div>
+        <script>
+            $(document).ready(function(){
+                $('#successToast').toast({
+                    autohide: true,
+                    delay: 3000
+                }).toast('show');
+                setTimeout(function(){
+                    window.location.href = 'users';
+                }, 3000);
+            });
+        </script>";
+    }else{
+        echo "<div id='errorToast' class='toast' role='alert' aria-live='assertive' aria-atomic='true' data-delay='3000' style='position: fixed; bottom: 20px; right: 20px; width: 300px;'>
+        <div class='toast-header bg-danger text-white'>
+            <strong class='mr-auto'>Error</strong>
+        </div>
+        <div class='toast-body'>
+            خطایی رخ داده، دوباره امتحان کنید!<br>Error: " . htmlspecialchars($stmt->error) . "
+        </div>
+        </div>
+        <script>
+            $(document).ready(function(){
+                $('#errorToast').toast({
+                    autohide: true,
+                    delay: 3000
+                }).toast('show');
+                setTimeout(function(){
+                    window.location.href = 'users';
+                }, 3000);
+            });
+        </script>";
+    }
 }

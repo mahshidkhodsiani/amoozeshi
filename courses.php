@@ -7,6 +7,7 @@ if(!isset($_SESSION['user_data'])){
 }
 $id = $_SESSION['user_data']['id'];
 $admin = $_SESSION['user_data']['admin'];
+$confirm = $_SESSION['user_data']['confirm'];
 
 ?>
 <!DOCTYPE html>
@@ -32,10 +33,7 @@ $admin = $_SESSION['user_data']['admin'];
 
  
     <div class="content">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <button class="btn btn-outline-light d-lg-none" onclick="toggleSidebar()">☰</button>
-        <h5 class="navbar-brand" >روش های پولسازی</h5>
-        </nav>
+        <?php include "header.php"; ?>
 
         <div class="container">
             <div class="container">
@@ -57,6 +55,10 @@ $admin = $_SESSION['user_data']['admin'];
             
 
                 <br>
+
+                <?php
+                if($confirm == 1){
+                ?>
 
                 <div class="row mt-5 justify-content-center">
                     <div class="col-md-10 ">
@@ -103,6 +105,13 @@ $admin = $_SESSION['user_data']['admin'];
 
                     </div>
                 </div>
+
+                <?php
+                }else{
+                    echo "<h2>هنوز پرداخت انجام نشده.</h2>";
+                    echo "<a href='pardakht'>صفحه پرداخت</a>";
+                }
+                ?>
 
             </div>
         </div>

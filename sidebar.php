@@ -15,7 +15,6 @@
 
 
 <?php
-include "functions.php";
 
 if($admin == 1){
 
@@ -23,11 +22,13 @@ if($admin == 1){
 
 <div class="sidebar" id="sidebar">
     <span class="close-btn" onclick="toggleSidebar()">×</span>
-    <span><?=get_name($id)?></span>
+ 
     <a href="index.php" class="sidebar-link">داشبورد</a>
     <a href="courses.php" class="sidebar-link">آموزش ها</a>
+    <a href="pardakht.php" class="sidebar-link">پرداخت دوره ها</a>
     <a href="user.php" class="sidebar-link">پروفایل</a>
     <a href="users.php" class="sidebar-link">مدیریت کابران</a>
+    <a href="logout_proccess.php" class="sidebar-link">خروج</a>
 </div>
 
 <?php
@@ -35,10 +36,13 @@ if($admin == 1){
 ?>
 <div class="sidebar" id="sidebar">
     <span class="close-btn" onclick="toggleSidebar()">×</span>
-    <span><?=get_name($id)?></span>
+  
     <a href="index.php" class="sidebar-link">داشبورد</a>
     <a href="courses.php" class="sidebar-link">آموزش ها</a>
+    <a href="pardakht.php" class="sidebar-link">پرداخت دوره ها</a>
     <a href="user.php" class="sidebar-link">پروفایل</a>
+    <a href="logout_proccess.php" class="sidebar-link">خروج</a>
+
 </div>
 <?php
 }

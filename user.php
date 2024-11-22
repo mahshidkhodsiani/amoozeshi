@@ -6,15 +6,16 @@ if(!isset($_SESSION['user_data'])){
     exit();
 }
 $id = $_SESSION['user_data']['id'];
-
 $admin = $_SESSION['user_data']['admin'];
+$confirm = $_SESSION['user_data']['confirm'];
+
 ?>
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Beautiful Admin Panel</title>
+  <title>صفحه کاربری</title>
   <link rel="stylesheet" href="css/mainstyles.css">
 
 
@@ -72,10 +73,7 @@ $admin = $_SESSION['user_data']['admin'];
 
   <!-- Main content -->
   <div class="content">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <button class="btn btn-outline-light d-lg-none" onclick="toggleSidebar()">☰</button>
-      <h5 class="navbar-brand" >روش های پولسازی</h5>
-    </nav>
+    <?php include "header.php"; ?>
 
     <!-- Main Content -->
     <div class="container">
@@ -84,6 +82,9 @@ $admin = $_SESSION['user_data']['admin'];
                 <h2>پروفایل من</h2>
             </div>
 
+            <?php
+                if($confirm == 1){
+            ?>
             <div class="row mt-5 ">
  
 
@@ -128,6 +129,38 @@ $admin = $_SESSION['user_data']['admin'];
 
                     
                 </div>
+
+                <div class="col-md-7">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>نام</th>
+                                    <th>میزان سود(دلار)</th>
+                                    <th>تاریخ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $sql1 = "SELECT * FROM profits WHERE user_id = $id";
+                                $result1 = $conn->query($sql1);
+                                if ($result1->num_rows > 0) {
+                                    while($row1 = $result1->fetch_assoc()) {
+                                        ?>
+                                        <tr>
+                                            <td><?php echo get_name($row1['user_id']); ?></td>
+                                            <td><?php echo $row1['profit']; ?></td>
+                                            <td><?php echo $row1['created_at']; ?></td>
+                                        </tr>
+                                        <?php
+                                    }
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
                
             </div>
            
@@ -195,6 +228,13 @@ $admin = $_SESSION['user_data']['admin'];
                 ?>
             </div>
 
+
+            <?php
+                }else{
+                    echo "<h2>هنوز پرداخت انجام نشده.</h2>";
+                    echo "<a href='pardakht'>صفحه پرداخت</a>";
+                }
+            ?>
 
             
         </div>
