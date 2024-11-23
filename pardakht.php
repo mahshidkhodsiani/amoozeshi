@@ -47,29 +47,35 @@ $admin = $_SESSION['user_data']['admin'];
                     <h5 style="background-color: yellow; display: inline;">09902461831</h5>  
                 </div>
                 
-                <div class="col-md-3">
+                <div class="col-md-6">
                     <div class="card shadow-lg rounded border-0" style="width: 100%; max-width: 22rem;">
                         <div class="card-body text-center p-4">
-                            <h5 class="card-title font-weight-bold">Beautiful Card Title</h5>
-                            <h6 class="card-subtitle mb-3 text-muted">Subtitle here</h6>
+                            <h5 class="card-title font-weight-bold">پرداخت با کد دعوت</h5>
+                            <h6 class="card-subtitle mb-3 text-muted">200 دلار</h6>
                             <p class="card-text text-secondary">This is a beautifully designed card that can showcase your content in a stylish way. Add your description here to make it informative and engaging.</p>
                             
                         </div>
                     </div>
 
                 </div>
-                <div class="col-md-3">
+     
+
+                <div class="col-md-6">
                     <div class="card shadow-lg rounded border-0" style="width: 100%; max-width: 22rem;">
                         <div class="card-body text-center p-4">
-                            <h5 class="card-title font-weight-bold">Beautiful Card Title</h5>
-                            <h6 class="card-subtitle mb-3 text-muted">Subtitle here</h6>
+                            <h5 class="card-title font-weight-bold">پرداخت بدون کد دعوعت </h5>
+                            <h6 class="card-subtitle mb-3 text-muted">268 دلار</h6>
                             <p class="card-text text-secondary">This is a beautifully designed card that can showcase your content in a stylish way. Add your description here to make it informative and engaging.</p>
                             
                         </div>
                     </div>
 
                 </div>
-                <div class="col-md-3">
+            </div>
+
+            
+            <div class="row mt-5">
+                <div class="col-md-6">
                     <div class="card shadow-lg rounded border-0" style="width: 100%; max-width: 22rem;">
                         <div class="card-body text-center p-4">
                             <h5 class="card-title font-weight-bold">Beautiful Card Title</h5>
@@ -79,7 +85,7 @@ $admin = $_SESSION['user_data']['admin'];
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-6">
                     <div class="card shadow-lg rounded border-0" style="width: 100%; max-width: 22rem;">
                         <div class="card-body text-center p-4">
                             <h5 class="card-title font-weight-bold">Beautiful Card Title</h5>
