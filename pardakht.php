@@ -52,20 +52,65 @@ $admin = $_SESSION['user_data']['admin'];
                         <div class="card-body text-center p-4">
                             <h5 class="card-title font-weight-bold">پرداخت با کد دعوت</h5>
                             <h6 class="card-subtitle mb-3 text-muted">200 دلار</h6>
-                            <p class="card-text text-secondary">This is a beautifully designed card that can showcase your content in a stylish way. Add your description here to make it informative and engaging.</p>
-                            
+                            <form id="referralForm" method="POST">
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="invitationCode" 
+                                    name="invited" 
+                                    placeholder="کد دعوات خودرا وارد کنید" 
+                                    required>
+                                <button 
+                                    type="button" 
+                                    id="verifyCode" 
+                                    class="btn btn-primary mt-3">تایید</button>
+                            </form>
+
+                            <!-- Wallet Address Display -->
+                            <p id="walletAddress" class="card-text text-secondary" style="display: none;">شماره والت: ssss</p>
                         </div>
                     </div>
-
                 </div>
+
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                <script>
+                    $(document).ready(function() {
+                        $('#verifyCode').on('click', function() {
+                            const invitationCode = $('#invitationCode').val();
+                            
+                            $.ajax({
+                                url: 'check_invitation.php', // Path to PHP script
+                                type: 'POST',
+                                data: { invited: invitationCode },
+                                success: function(response) {
+                                    console.log(response); // Debug server response
+                                    if (response.trim() === "yes") {
+                                        $('#walletAddress').show();
+                                    } else {
+                                        alert("کد دعوت نامعتبر است");
+                                    }
+                                }
+                                ,
+                                error: function() {
+                                    alert('خطایی رخ داده است. لطفا دوباره تلاش کنید.');
+                                }
+                            });
+                        });
+                    });
+                </script>
+
+
+
+               
      
+
 
                 <div class="col-md-6">
                     <div class="card shadow-lg rounded border-0" style="width: 100%; max-width: 22rem;">
                         <div class="card-body text-center p-4">
                             <h5 class="card-title font-weight-bold">پرداخت بدون کد دعوعت </h5>
                             <h6 class="card-subtitle mb-3 text-muted">268 دلار</h6>
-                            <p class="card-text text-secondary">This is a beautifully designed card that can showcase your content in a stylish way. Add your description here to make it informative and engaging.</p>
+                            <p class="card-text text-secondary">شماره والت : dda23</p>
                             
                         </div>
                     </div>
@@ -73,29 +118,7 @@ $admin = $_SESSION['user_data']['admin'];
                 </div>
             </div>
 
-            
-            <div class="row mt-5">
-                <div class="col-md-6">
-                    <div class="card shadow-lg rounded border-0" style="width: 100%; max-width: 22rem;">
-                        <div class="card-body text-center p-4">
-                            <h5 class="card-title font-weight-bold">Beautiful Card Title</h5>
-                            <h6 class="card-subtitle mb-3 text-muted">Subtitle here</h6>
-                            <p class="card-text text-secondary">This is a beautifully designed card that can showcase your content in a stylish way. Add your description here to make it informative and engaging.</p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card shadow-lg rounded border-0" style="width: 100%; max-width: 22rem;">
-                        <div class="card-body text-center p-4">
-                            <h5 class="card-title font-weight-bold">Beautiful Card Title</h5>
-                            <h6 class="card-subtitle mb-3 text-muted">Subtitle here</h6>
-                            <p class="card-text text-secondary">This is a beautifully designed card that can showcase your content in a stylish way. Add your description here to make it informative and engaging.</p>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
+
 
 
 
