@@ -2,7 +2,7 @@
 
 include "config.php";
 
-if (isset($_POST['invited'])) {
+if (isset($_POST['invited']) && $_POST['invited'] != '') {
     $invited = $_POST['invited'];
     $stmt = $conn->prepare("SELECT * FROM user WHERE invited_code = ?");
 
