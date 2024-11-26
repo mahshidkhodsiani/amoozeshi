@@ -142,8 +142,12 @@ $confirm = $_SESSION['user_data']['confirm'];
                             </thead>
                             <tbody>
                                 <?php
-                                $sql1 = "SELECT * FROM profits WHERE user_id = $id";
+                               $sql1 = "SELECT profits.*, invited.*
+                               FROM profits
+                               LEFT JOIN invited ON profits.user_id = invited.user_id
+                               WHERE profits.user_id = $id AND invited.confirm = 1";
                                 $result1 = $conn->query($sql1);
+                      
                                 if ($result1->num_rows > 0) {
                                     while($row1 = $result1->fetch_assoc()) {
                                         ?>
@@ -168,65 +172,136 @@ $confirm = $_SESSION['user_data']['confirm'];
 
             <hr>
             
-            <div class="col-md-5">
-                <h2 style="color: green;">درخت ارجاع</h2>
-                <br>
+            <?php
+            if($admin == 1){
+            ?>
+                <div class="col-md-5">
+                    <h2 style="color: green;">درخت ارجاع</h2>
+                    <br>
 
-                <?php
-                    // این تابع برای دریافت افرادی که هر کاربر معرفی کرده است استفاده می‌شود.
-                    function get_invited_people($user_id, $conn) {
-                        $invited_sql = "SELECT user.id, user.name 
-                                        FROM user 
-                                        INNER JOIN invited ON user.id = invited.invited_id 
-                                        WHERE invited.user_id = " . $user_id;
-                        $invited_result = $conn->query($invited_sql);
-                        
-                        $invited_people = [];
-                        while($invited = $invited_result->fetch_assoc()) {
-                            $invited_people[] = $invited;
-                        }
-                        
-                        return $invited_people;
-                    }
-
-                    // نمایش درخت
-                    function display_tree($user_id, $conn, $level = 1) {
-                        // محدود کردن به 4 سطح
-                        if ($level > 4) {
-                            return; // توقف بازگشت
-                        }
-
-                        // دریافت اطلاعات کاربر
-                        $sql = "SELECT * FROM user WHERE id = " . $user_id;
-                        $result = $conn->query($sql);
-                        $user = $result->fetch_assoc();
-                        
-                        // نمایش کاربر
-                        echo '<div class="tree-item">';
-                        echo '<span class="tree-node" onclick="toggleInvited(' . $user["id"] . ')">' . $user["name"] . '</span>';
-                        
-                        // دریافت افرادی که این کاربر معرفی کرده است
-                        $invited_people = get_invited_people($user_id, $conn);
-                        
-                        if (count($invited_people) > 0) {
-                            echo '<div class="tree-branch" id="invited-' . $user["id"] . '" style="display: none;">';
-                            foreach($invited_people as $invited) {
-                                display_tree($invited['id'], $conn, $level + 1); // ارسال سطح به تابع
+                    <?php
+                        // این تابع برای دریافت افرادی که هر کاربر معرفی کرده است استفاده می‌شود.
+                        function get_invited_people($user_id, $conn) {
+                            $invited_sql = "SELECT user.id, user.name 
+                                            FROM user 
+                                            INNER JOIN invited ON user.id = invited.invited_id 
+                                            WHERE invited.user_id = " . $user_id;
+                            $invited_result = $conn->query($invited_sql);
+                            
+                            $invited_people = [];
+                            while($invited = $invited_result->fetch_assoc()) {
+                                $invited_people[] = $invited;
                             }
-                            echo '</div>';
-                        } else {
-                            echo '<div class="tree-branch" id="invited-' . $user["id"] . '" style="display: none;">هیچ معرفی نشده است</div>';
+                            
+                            return $invited_people;
                         }
-                        
-                        echo '</div>';
-                    }
 
-                    // شروع نمایش درخت از کاربر با شناسه 1 (می‌توانید شناسه کاربر مورد نظر خود را تغییر دهید)
-                    echo '<div class="tree">';
-                    display_tree($id, $conn); // تغییر به شناسه کاربری که می‌خواهید از آن شروع کنید
-                    echo '</div>';
-                ?>
-            </div>
+                     
+                        // نمایش درخت
+                        function display_tree($user_id, $conn, $level = 1, $admin = 0) {
+                            // محدود کردن به 4 سطح فقط برای کاربران عادی
+                            if ($level > 4 && $admin == 0) {
+                                return; // توقف بازگشت
+                            }
+
+                            // دریافت اطلاعات کاربر
+                            $sql = "SELECT * FROM user WHERE id = " . $user_id;
+                            $result = $conn->query($sql);
+                            $user = $result->fetch_assoc();
+                            
+                            // نمایش کاربر
+                            echo '<div class="tree-item">';
+                            echo '<span class="tree-node" onclick="toggleInvited(' . $user["id"] . ')">' . $user["name"] . '</span>';
+                            
+                            // دریافت افرادی که این کاربر معرفی کرده است
+                            $invited_people = get_invited_people($user_id, $conn);
+                            
+                            if (count($invited_people) > 0) {
+                                echo '<div class="tree-branch" id="invited-' . $user["id"] . '" style="display: none;">';
+                                foreach($invited_people as $invited) {
+                                    display_tree($invited['id'], $conn, $level + 1, $admin); // ارسال سطح به تابع و وضعیت مدیر
+                                }
+                                echo '</div>';
+                            } else {
+                                echo '<div class="tree-branch" id="invited-' . $user["id"] . '" style="display: none;">هیچ معرفی نشده است</div>';
+                            }
+                            
+                            echo '</div>';
+                        }
+
+                        echo '<div class="tree">';
+                        display_tree($id, $conn, 1, $admin); // اضافه کردن $admin به تابع
+                        echo '</div>';
+                        
+                    ?>
+                </div>
+            <?php
+            }else{
+            ?>
+                <div class="col-md-5">
+                    <h2 style="color: green;">درخت ارجاع</h2>
+                    <br>
+
+                    <?php
+                        // این تابع برای دریافت افرادی که هر کاربر معرفی کرده است استفاده می‌شود.
+                        function get_invited_people($user_id, $conn) {
+                            $invited_sql = "SELECT user.id, user.name 
+                                            FROM user 
+                                            INNER JOIN invited ON user.id = invited.invited_id 
+                                            WHERE invited.user_id = " . $user_id;
+                            $invited_result = $conn->query($invited_sql);
+                            
+                            $invited_people = [];
+                            while($invited = $invited_result->fetch_assoc()) {
+                                $invited_people[] = $invited;
+                            }
+                            
+                            return $invited_people;
+                        }
+
+                        // نمایش درخت
+                        function display_tree($user_id, $conn, $level = 1) {
+                            // محدود کردن به 4 سطح
+                            if ($level > 4) {
+                                return; // توقف بازگشت
+                            }
+
+                            // دریافت اطلاعات کاربر
+                            $sql = "SELECT * FROM user WHERE id = " . $user_id;
+                            $result = $conn->query($sql);
+                            $user = $result->fetch_assoc();
+                            
+                            // نمایش کاربر
+                            echo '<div class="tree-item">';
+                            echo '<span class="tree-node" onclick="toggleInvited(' . $user["id"] . ')">' . $user["name"] . '</span>';
+                            
+                            // دریافت افرادی که این کاربر معرفی کرده است
+                            $invited_people = get_invited_people($user_id, $conn);
+                            
+                            if (count($invited_people) > 0) {
+                                echo '<div class="tree-branch" id="invited-' . $user["id"] . '" style="display: none;">';
+                                foreach($invited_people as $invited) {
+                                    display_tree($invited['id'], $conn, $level + 1); // ارسال سطح به تابع
+                                }
+                                echo '</div>';
+                            } else {
+                                echo '<div class="tree-branch" id="invited-' . $user["id"] . '" style="display: none;">هیچ معرفی نشده است</div>';
+                            }
+                            
+                            echo '</div>';
+                        }
+
+                        // شروع نمایش درخت از کاربر با شناسه 1 (می‌توانید شناسه کاربر مورد نظر خود را تغییر دهید)
+                        echo '<div class="tree">';
+                        display_tree($id, $conn); // تغییر به شناسه کاربری که می‌خواهید از آن شروع کنید
+                        echo '</div>';
+                    ?>
+                </div>
+            <?php
+            }
+            ?>
+
+           
 
 
             <?php

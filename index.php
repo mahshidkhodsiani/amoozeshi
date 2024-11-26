@@ -27,6 +27,7 @@ $admin = $_SESSION['user_data']['admin'];
     <?php
     include "sidebar.php";
     include "includes.php";
+    include "config.php";
     ?>
 
    <!-- Main content -->
@@ -38,6 +39,44 @@ $admin = $_SESSION['user_data']['admin'];
             <div class="row">
                 <h2 class="">داشبورد</h2>
             </div>
+
+
+            
+            <div class="row mt-5">
+            جدیدترینها:
+                <div class="col-md-6">
+                <table class="table border text-center">
+                    <thead>
+                        <tr>
+                            <th scope="col">ردیف</th>
+                            <th scope="col">یوزر</th>
+                            <th scope="col">شماره تلفن</th>
+                            <th scope="col">درخواست فراموشی رمز</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $query = "SELECT * FROM user WHERE forgot_pass = 1 ORDER BY id DESC";
+                        $result = $conn->query($query);
+                        $i = 1;
+                        while($row = $result->fetch_assoc()){
+                            $status = $row['forgot_pass'] == 1 ? 'دارد' : ''; 
+                            echo "<tr>
+                                <th scope='row'>$i</th>
+                                <td>".$row['name']." ".$row['family']."</td>
+                                <td>".$row['phone']."</td>
+                                <td>$status</td>
+                                </tr>";
+                            $i++;
+                        }
+                        ?>
+                    </tbody>
+                </table>
+
+                </div>
+           
+            
+            </div>
         
             <div class="row mt-5">
 
@@ -46,7 +85,6 @@ $admin = $_SESSION['user_data']['admin'];
                         <div class="card-body">
                         <h5 class="card-title">پولسازی</h5>
                         <p class="card-text">دوره روانشناسی پول و ثروت</p>
-                        <p class="card-text">8 جلسه صوتی</p>
                         </div>
                     </div>
                 </div>
@@ -55,7 +93,6 @@ $admin = $_SESSION['user_data']['admin'];
                         <div class="card-body">
                         <h5 class="card-title">تصاعد</h5>
                         <p class="card-text">دوره تصاعد</p>
-                        <p class="card-text">8 جلسه تصویری</p>
                         </div>
                     </div>
                 </div>
@@ -64,7 +101,6 @@ $admin = $_SESSION['user_data']['admin'];
                         <div class="card-body">
                         <h5 class="card-title">کریپتو</h5>
                         <p class="card-text">آموزش 0 تا 100 بازار مالی</p>
-                        <p class="card-text">30 جلسه</p>
                         </div>
                     </div>
                 </div>

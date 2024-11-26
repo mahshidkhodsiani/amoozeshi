@@ -63,7 +63,7 @@
                   <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
                   <label class="form-check-label" for="form2Example3"> Remember me </label>
                 </div>
-                <a href="#!" class="text-body">Forgot password?</a>
+                <a href="forgot_pass" class="text-body">Forgot password?</a>
               </div>
               <div class="text-center text-lg-start mt-4 pt-2">
                 <button name="login" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>

@@ -27,6 +27,7 @@ $admin = $_SESSION['user_data']['admin'];
     <?php
     include "sidebar.php";
     include "includes.php";
+    include "config.php";
     ?>
 
    <!-- Main content -->
@@ -44,7 +45,7 @@ $admin = $_SESSION['user_data']['admin'];
                 <div class="col-md-12 mb-4" style="text-align: right;">
                     <p style="background-color: yellow; display: inline;">لطفا واریزی را به یکی از آدرس های زیر انجام داده و اسکرین شات واریز را برای این شماره ارسال کنید:</p>
 
-                    <h5 style="background-color: yellow; display: inline;">09902461831</h5>  
+                    <h5 style="background-color: yellow; display: inline;"></h5>  
                 </div>
                 
                 <div class="col-md-6">
@@ -67,7 +68,20 @@ $admin = $_SESSION['user_data']['admin'];
                             </form>
 
                             <!-- Wallet Address Display -->
-                            <p id="walletAddress" class="card-text text-secondary" style="display: none;">شماره والت: ssss</p>
+                            <div id="walletAddress" style="display: none;">
+                                <?php 
+                                $wall = "SELECT * FROM wallets";
+                                $result = $conn->query($wall);
+                                if ($result->num_rows > 0) {
+                                    while($row = $result->fetch_assoc()) {
+                                        echo "<p class='card-text text-secondary'> آدرس والت: ". $row["address"]. "</p>";
+                                    }
+                                } else {
+                                echo "<p class='card-text text-secondary'>هنوز والتی ایجاد نشده.</p>";
+                                }
+                                ?>
+                                
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -118,6 +132,31 @@ $admin = $_SESSION['user_data']['admin'];
                 </div>
             </div>
 
+            <?php
+            if($admin == 1){
+                ?>  
+                <div class="row mt-5">
+                    <div class="col-md-6">
+                        اضافه کردن والت جدید
+                        <form id="" method="POST">
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                id="newWalletAddress" 
+                                name="newAddress" 
+                                placeholder="آدرس والتی که میخواهید را اضافه کنید" 
+                                required>
+                            <button 
+                                name="submit"
+                                id="addWallet" 
+                                class="btn btn-primary mt-3">افزودن</button>
+                        </form>
+                    </div>
+                    <div class="col-md-6"></div>
+                </div>
+                <?php
+            }
+            ?>
 
 
 
@@ -131,9 +170,16 @@ $admin = $_SESSION['user_data']['admin'];
 
 
 
-
-
-
-
 </body>
 </html>
+
+<?php
+if(isset($_POST['submit'])){
+    $newAddress = $_POST['newAddress'];
+    $sql = "INSERT INTO wallets (address) VALUES ('$newAddress')";
+    if ($conn->query($sql) === TRUE) {
+        echo "والت  با موفقیت افزوده شد";
+    } else {
+        echo "خطا: ". $sql. "<br>". $conn->error;
+    }
+}

@@ -41,6 +41,7 @@ if($admin == 1){
     <a href="courses.php" class="sidebar-link">آموزش ها</a>
     <a href="pardakht.php" class="sidebar-link">پرداخت دوره ها</a>
     <a href="user.php" class="sidebar-link">پروفایل</a>
+    <a href="telegram.php" class="sidebar-link">پشتیبانی از طریق تلگرام</a>
     <a href="logout_proccess.php" class="sidebar-link">خروج</a>
 
 </div>

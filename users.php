@@ -99,14 +99,15 @@ $admin = $_SESSION['user_data']['admin'];
             ?>
 
             <div class="row mt-5">
-                <div class="col-md-6" style="text-align: right !important;">
-                    <table class="table border">
+                <div class="col-md-7" style="text-align: right !important;">
+                    <table class="table border text-center">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">نام و نام خانوادگی</th>
                                 <th scope="col">ادمین</th>
                                 <th scope="col">عملیات</th>
+                                <th scope="col">ویرایش اطلاعات کاربر</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -133,6 +134,9 @@ $admin = $_SESSION['user_data']['admin'];
                                                 }
                                                 ?>
                                             </form>
+                                        </td>
+                                        <td>
+                                            <a href="edit_user.php?id_user=<?= $row['id'] ?>" class="btn btn-primary btn-sm">ادیت</a>
                                         </td>
                                     </tr>
 
@@ -258,47 +262,54 @@ if (isset($_POST['delete'])) {
 
 if(isset($_POST['confirm'])){
     $user_id = $_POST['user_id'];
-    $sql = "UPDATE user SET confirm = 1 WHERE id = $user_id";
 
-    if($conn->query($sql)){
-        echo "<div id='successToast' class='toast' role='alert' aria-live='assertive' aria-atomic='true' data-delay='3000' style='position: fixed; bottom: 20px; right: 20px; width: 300px;'>
-        <div class='toast-header bg-success text-white'>
-            <strong class='mr-auto'>Success</strong>
-        </div>
-        <div class='toast-body'>
-            اکانت با موفقیت تایید شد!
-        </div>
-        </div>
-        <script>
-            $(document).ready(function(){
-                $('#successToast').toast({
-                    autohide: true,
-                    delay: 3000
-                }).toast('show');
-                setTimeout(function(){
-                    window.location.href = 'users';
-                }, 3000);
-            });
-        </script>";
-    }else{
-        echo "<div id='errorToast' class='toast' role='alert' aria-live='assertive' aria-atomic='true' data-delay='3000' style='position: fixed; bottom: 20px; right: 20px; width: 300px;'>
-        <div class='toast-header bg-danger text-white'>
-            <strong class='mr-auto'>Error</strong>
-        </div>
-        <div class='toast-body'>
-            خطایی رخ داده، دوباره امتحان کنید!<br>Error: " . htmlspecialchars($stmt->error) . "
-        </div>
-        </div>
-        <script>
-            $(document).ready(function(){
-                $('#errorToast').toast({
-                    autohide: true,
-                    delay: 3000
-                }).toast('show');
-                setTimeout(function(){
-                    window.location.href = 'users';
-                }, 3000);
-            });
-        </script>";
+    $profit = "UPDATE invited SET confirm = 1 WHERE invited_id = $user_id";
+    $profit_result = $conn->query($profit);
+    
+    if($profit_result){
+        $sql = "UPDATE user SET confirm = 1 WHERE id = $user_id";
+
+        if($conn->query($sql)){
+        
+            echo "<div id='successToast' class='toast' role='alert' aria-live='assertive' aria-atomic='true' data-delay='3000' style='position: fixed; bottom: 20px; right: 20px; width: 300px;'>
+            <div class='toast-header bg-success text-white'>
+                <strong class='mr-auto'>Success</strong>
+            </div>
+            <div class='toast-body'>
+                اکانت با موفقیت تایید شد!
+            </div>
+            </div>
+            <script>
+                $(document).ready(function(){
+                    $('#successToast').toast({
+                        autohide: true,
+                        delay: 3000
+                    }).toast('show');
+                    setTimeout(function(){
+                        window.location.href = 'users';
+                    }, 3000);
+                });
+            </script>";
+        }else{
+            echo "<div id='errorToast' class='toast' role='alert' aria-live='assertive' aria-atomic='true' data-delay='3000' style='position: fixed; bottom: 20px; right: 20px; width: 300px;'>
+            <div class='toast-header bg-danger text-white'>
+                <strong class='mr-auto'>Error</strong>
+            </div>
+            <div class='toast-body'>
+                خطایی رخ داده، دوباره امتحان کنید!<br>Error: " . htmlspecialchars($stmt->error) . "
+            </div>
+            </div>
+            <script>
+                $(document).ready(function(){
+                    $('#errorToast').toast({
+                        autohide: true,
+                        delay: 3000
+                    }).toast('show');
+                    setTimeout(function(){
+                        window.location.href = 'users';
+                    }, 3000);
+                });
+            </script>";
+        }
     }
 }
