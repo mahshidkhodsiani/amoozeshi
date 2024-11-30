@@ -131,6 +131,10 @@ $confirm = $_SESSION['user_data']['confirm'];
                     
                 </div>
 
+                <?php
+                if($admin == 0){
+                    ?>
+                
                 <div class="col-md-7">
                     <div class="table-responsive">
                         <table class="table table-bordered">
@@ -138,11 +142,13 @@ $confirm = $_SESSION['user_data']['confirm'];
                                 <tr>
                                     <th>نام</th>
                                     <th>میزان سود(دلار)</th>
+                                    <th>تسویه</th>
+                                    <th>تایید ادمین</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                $sql1 ="SELECT * FROM profits where user_id = $id";
+                                $sql1 ="SELECT * FROM profits where user_id = $id ";
                        
 
 
@@ -154,6 +160,25 @@ $confirm = $_SESSION['user_data']['confirm'];
                                         <tr>
                                             <td><?php echo get_name($row1['user_id']); ?></td>
                                             <td><?php echo $row1['profit']; ?></td>
+                                            <td>
+                                                <?php
+                                                if ($row1['tasfieh'] == 1){
+                                                     echo "تسویه شده";
+                                                }else{
+                                                     echo "تسویه نشده";
+ 
+                                                }
+                                                ?>
+                                            </td>
+                                            <td>
+                                                 <?php
+                                                if ($row1['confirm'] == 1){
+                                                     echo "تایید شده";
+                                                } else{
+                                                     echo "تایید نشده";
+                                                }
+                                                ?>
+                                            </td>
                                         </tr>
                                         <?php
                                     }
@@ -164,6 +189,82 @@ $confirm = $_SESSION['user_data']['confirm'];
                     </div>
                 </div>
 
+
+
+                <?php
+                }else{
+                ?>
+                <div class="col-md-7">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>نام</th>
+                                    <th>میزان سود(دلار)</th>
+                                    <th>تسویه</th>
+                                    <th>تایید</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                
+                                $sql1 ="SELECT * FROM profits";
+                       
+
+
+                                $result1 = $conn->query($sql1);
+                      
+                                if ($result1->num_rows > 0) {
+                                    while($row1 = $result1->fetch_assoc()) {
+                                        ?>
+                                        <tr>
+                                            <td><?php echo get_name($row1['user_id']); ?></td>
+                                            <td><?php echo $row1['profit']; ?></td>
+                                            <td>
+                                                <?php
+                                                if ($row1['tasfieh'] == 1){
+                                                     echo "تسویه شده";
+                                                }else{
+                                                ?>
+
+                                                <form action="" method="POST">
+                                                    <input type="hidden" name="id_profit" value="<?= $row1['id']; ?>" />
+                                                    <button name="submit_tasfieh" class="btn btn-primary">تسویه کن</button>
+                                                </form>
+                                                <?php
+
+                                                }
+                                                ?>
+                                            </td>
+                                            <td>
+                                                
+                                                <?php
+                                                if ($row1['confirm'] == 1){
+                                                     echo "تایید شده";
+                                                }else{
+                                               ?>
+                                               <form action="" method="POST">
+                                                 <input type="hidden" name="id_profit" value="<?= $row1['id'];?>" />
+                                                 <button name="submit_confirm" class="btn btn-primary">تایید کن</button>
+                                               </form>
+                                               <?php
+                                                }
+                                                ?>
+                                            </td>
+                                        </tr>
+                                        <?php
+                                    }
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                    
+
+                <?php
+                }
+                ?>
                
             </div>
            
@@ -333,9 +434,9 @@ $confirm = $_SESSION['user_data']['confirm'];
 </html>
 
 <?php
-if(isset($_POST['tasfieh'])){
-    $tasfieh_id = $_POST['tasfieh_id'];
-    $sql = "UPDATE profits SET tasfieh = 1 WHERE id = $tasfieh_id ";
+if(isset($_POST['submit_tasfieh'])){
+    $id_profit = $_POST['id_profit'];
+    $sql = "UPDATE profits SET tasfieh = 1 WHERE id = $id_profit ";
     if ($conn->query($sql) === TRUE) {
         echo "<div id='successToast' class='toast' role='alert' aria-live='assertive' aria-atomic='true' data-delay='3000' style='position: fixed; bottom: 20px; right: 20px; width: 300px;'>
         <div class='toast-header bg-success text-white'>
@@ -357,6 +458,52 @@ if(isset($_POST['tasfieh'])){
             });
         </script>";
     } else {
+        echo "<div id='errorToast' class='toast' role='alert' aria-live='assertive' aria-atomic='true' data-delay='3000' style='position: fixed; bottom: 20px; right: 20px; width: 300px;'>
+        <div class='toast-header bg-danger text-white'>
+            <strong class='mr-auto'>Error</strong>
+        </div>
+        <div class='toast-body'>
+            خطایی رخ داده، دوباره امتحان کنید!<br>Error: " . htmlspecialchars($stmt->error) . "
+        </div>
+        </div>
+        <script>
+            $(document).ready(function(){
+                $('#errorToast').toast({
+                    autohide: true,
+                    delay: 3000
+                }).toast('show');
+                setTimeout(function(){
+                    window.location.href = 'user';
+                }, 3000);
+            });
+        </script>";
+    }
+}
+
+if(isset($_POST['submit_confirm'])){
+    $id_profit = $_POST['id_profit'];
+    $sql = "UPDATE profits SET confirm = 1 WHERE id = $id_profit ";
+    if ($conn->query($sql) === TRUE) {
+        echo "<div id='successToast' class='toast' role='alert' aria-live='assertive' aria-atomic='true' data-delay='3000' style='position: fixed; bottom: 20px; right: 20px; width: 300px;'>
+        <div class='toast-header bg-success text-white'>
+            <strong class='mr-auto'>Success</strong>
+        </div>
+        <div class='toast-body'>
+             با موفقیت انجام شد!
+        </div>
+        </div>
+        <script>
+            $(document).ready(function(){
+                $('#successToast').toast({
+                    autohide: true,
+                    delay: 3000
+                }).toast('show');
+                setTimeout(function(){
+                    window.location.href = 'user';
+                }, 3000);
+            });
+        </script>";
+    }else{
         echo "<div id='errorToast' class='toast' role='alert' aria-live='assertive' aria-atomic='true' data-delay='3000' style='position: fixed; bottom: 20px; right: 20px; width: 300px;'>
         <div class='toast-header bg-danger text-white'>
             <strong class='mr-auto'>Error</strong>

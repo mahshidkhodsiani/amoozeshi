@@ -95,6 +95,7 @@ $admin = $_SESSION['user_data']['admin'];
 
             // Fetch data for the current page
             $sql = "SELECT * FROM user LIMIT $limit OFFSET $offset";
+
             $result = $conn->query($sql);
             ?>
 
