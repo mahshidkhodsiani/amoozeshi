@@ -35,3 +35,16 @@ function generateReferralCode() {
     // Concatenate all parts with hyphens
     return "{$part1}-{$part2}-{$part3}";
 }
+
+function tasfieh($id){
+    include "config.php";
+
+    $sql = "SELECT * FROM user WHERE id = $id";
+    $result = $conn->query($sql);
+    if($result->num_rows > 0){
+        $row = $result->fetch_assoc();
+        return $row['tasfieh'];
+    }else{
+        return "No data found";
+    }
+}

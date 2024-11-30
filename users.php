@@ -263,10 +263,15 @@ if (isset($_POST['delete'])) {
 if(isset($_POST['confirm'])){
     $user_id = $_POST['user_id'];
 
-    $profit = "UPDATE invited SET confirm = 1 WHERE invited_id = $user_id";
-    $profit_result = $conn->query($profit);
-    
-    if($profit_result){
+
+
+
+    $invite_cinfirm = "UPDATE invited SET confirmed = 1 WHERE invited_id = $user_id";
+    $invite_result = $conn->query($invite_cinfirm);
+
+
+
+    if($invite_result){
         $sql = "UPDATE user SET confirm = 1 WHERE id = $user_id";
 
         if($conn->query($sql)){

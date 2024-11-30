@@ -50,7 +50,7 @@ $admin = $_SESSION['user_data']['admin'];
                 <div class="row mt-5 justify-content-center">
                     <?php
                     $course = $_GET['num'];
-                    $sql = "SELECT * FROM courses WHERE category = '$course' ORDER BY id DESC";
+                    $sql = "SELECT * FROM courses WHERE category = '$course'";
                     $result = $conn->query($sql);
                     $counter = 0; // To track the number of cards in a row
                     
@@ -65,14 +65,15 @@ $admin = $_SESSION['user_data']['admin'];
                                 <div class="card-body">
                                     <h5 class="card-title"><?= htmlspecialchars($row['name']) ?></h5>
                                     <?php
-                                    if ($row['fileType'] == 'mp3') {
-                                        // Display an audio player for MP3 files
+                                    // Check the file type and display the appropriate player
+                                    if ($row['fileType'] == 'mp3' || $row['fileType'] == 'm4a') {
+                                        // Use an audio player for mp3 and m4a files
                                         echo '<audio controls>
-                                                <source src="' . htmlspecialchars($row['file']) . '" type="audio/mpeg">
+                                                <source src="' . htmlspecialchars($row['file']) . '" type="audio/' . ($row['fileType'] == 'mp3' ? 'mpeg' : 'mp4') . '">
                                                 Your browser does not support the audio element.
                                             </audio>';
                                     } elseif ($row['fileType'] == 'mp4') {
-                                        // Display a video player for video files
+                                        // Use a video player for mp4 files
                                         echo '<video controls width="100%">
                                                 <source src="' . htmlspecialchars($row['file']) . '" type="video/mp4">
                                                 Your browser does not support the video tag.
@@ -82,10 +83,10 @@ $admin = $_SESSION['user_data']['admin'];
                                         echo '<p class="card-text">Unsupported file type.</p>';
                                     }
                                     ?>
-                                    
                                 </div>
                             </div>
                         </div>
+
 
                         <?php
                         $counter++;

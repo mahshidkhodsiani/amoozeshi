@@ -61,6 +61,14 @@ $confirm = $_SESSION['user_data']['confirm'];
                 ?>
 
                 <div class="row mt-5 justify-content-center">
+
+                    <div class="col-md-7 mb-3 justify-content-center">
+
+                        <h5>مقدمه ای بر آموزش ها</h5>
+                        <video controls width="50%">
+                            <source src="uploads/moghadame.mp4" type="video/mp4">
+                        </video>
+                    </div>
                     <div class="col-md-10 ">
                         <div class="card shadow-lg rounded border-0" >
                             <div class="card-body text-center p-4">

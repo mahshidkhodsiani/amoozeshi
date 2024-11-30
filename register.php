@@ -205,7 +205,7 @@ if(isset($_POST['register'])){
             if($res2->num_rows > 0){
               $row2 = $res2->fetch_assoc();
               $id2 = $row2['user_id'];
-              $profit2 = "INSERT INTO profits (user_id, profit, created_at) VALUES ($id2, 30, NOW())";
+              $profit2 = "INSERT INTO profits (user_id, profit,  created_at) VALUES ($id2,  30, NOW())";
               $result2 = $conn->query($profit2);
               if($result2){
                 $sql3 = "SELECT * FROM invited WHERE invited_id = $id2";
@@ -213,7 +213,7 @@ if(isset($_POST['register'])){
                 if($res3->num_rows > 0){
                   $row3 = $res3->fetch_assoc();
                   $id3 = $row3['user_id'];
-                  $profit3 = "INSERT INTO profits (user_id, profit, created_at) VALUES ($id3, 10, NOW())";
+                  $profit3 = "INSERT INTO profits (user_id, profit, created_at) VALUES ($id3,  10, NOW())";
                   $result3 = $conn->query($profit3);
                 }
               }
