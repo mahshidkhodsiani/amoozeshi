@@ -140,7 +140,7 @@ $confirm = $_SESSION['user_data']['confirm'];
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>نام</th>
+                              
                                     <th>میزان سود(دلار)</th>
                                     <th>تسویه</th>
                                     <th>تایید ادمین</th>
