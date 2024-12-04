@@ -158,7 +158,7 @@ $confirm = $_SESSION['user_data']['confirm'];
                                     while($row1 = $result1->fetch_assoc()) {
                                         ?>
                                         <tr>
-                                            <td><?php echo get_name($row1['user_id']); ?></td>
+                                           
                                             <td><?php echo $row1['profit']; ?></td>
                                             <td>
                                                 <?php
@@ -208,7 +208,7 @@ $confirm = $_SESSION['user_data']['confirm'];
                             <tbody>
                                 <?php
                                 
-                                $sql1 ="SELECT * FROM profits";
+                                $sql1 ="SELECT * FROM profits ORDER BY id DESC";
                        
 
 

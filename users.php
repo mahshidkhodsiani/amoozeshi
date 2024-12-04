@@ -94,7 +94,7 @@ $admin = $_SESSION['user_data']['admin'];
             $totalPages = ceil($totalRecords / $limit);
 
             // Fetch data for the current page
-            $sql = "SELECT * FROM user LIMIT $limit OFFSET $offset";
+            $sql = "SELECT * FROM user ORDER BY id DESC LIMIT $limit OFFSET $offset";
 
             $result = $conn->query($sql);
             ?>
