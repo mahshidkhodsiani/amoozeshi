@@ -107,6 +107,7 @@ $admin = $_SESSION['user_data']['admin'];
                                 <th scope="col">#</th>
                                 <th scope="col">نام و نام خانوادگی</th>
                                 <th scope="col">ادمین</th>
+                                <th scope="col">گارانتی</th>
                                 <th scope="col">عملیات</th>
                                 <th scope="col">ویرایش اطلاعات کاربر</th>
                             </tr>
@@ -121,6 +122,7 @@ $admin = $_SESSION['user_data']['admin'];
                                         <th scope="row"><?= $a ?></th>
                                         <td><?= $row['name'] . " " . $row['family'] ?></td>
                                         <td><?= $row['admin'] ?></td>
+                                        <td><?= $row['garantee'] == 1 ? "دارد" : "ندارد" ?></td>
                                         <td>
                                             <form action="" method="POST">
                                                 <input type="hidden" name="user_id" value="<?= $row['id'] ?>" />
