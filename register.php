@@ -185,15 +185,19 @@ if(isset($_POST['register'])){
       if(isset($_POST['invited'])){
         $invited = $_POST['invited'];
         $search = "SELECT * FROM user WHERE referral_code = '$invited'";
-        
         $res = $conn->query($search);
+     
 
-
-      
+       
         // میدونم پیچیدس اما یکبار بخونی میفهمی
         if($res->num_rows > 0){
           $row1 = $res->fetch_assoc();
           $id1 = $row1['id'];
+
+          $garantee = "UPDATE user SET garantee = 0 WHERE id = $id1";
+          $conn->query($garantee);
+
+
           $insert = "INSERT INTO invited (user_id, invited_id) VALUES ('$id1', '$last')";
           $conn->query($insert);
 
