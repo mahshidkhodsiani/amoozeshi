@@ -90,6 +90,8 @@ $confirm = $_SESSION['user_data']['confirm'];
  
 
                 <div class="col-md-5" style="text-align: right !important;">
+                   
+
                     <?php
                     $sql = "SELECT * FROM user WHERE id = $id";
                     
@@ -98,6 +100,7 @@ $confirm = $_SESSION['user_data']['confirm'];
                         $row = $result->fetch_assoc();
                     }
 
+                    if($row['garantee'] == 0){
                     echo '
                     <div class="card" style="width: 18rem;">
                       <div class="card-body">
@@ -125,17 +128,41 @@ $confirm = $_SESSION['user_data']['confirm'];
                         }
                     </script>
                     ';
-                    ?>
+                    }
                     
+                    if($row['garantee'] == 1){
+                    ?>
+                        <h5>کد رفرال من :</h5>
+                        <form action="" method="POST" style="font-family: 'IRANSans', sans-serif; max-width: 400px; padding: 20px; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); background-color: #f9f9f9; ">
+                            <h6 style="font-size: 14px; color: #555; line-height: 1.6; margin-bottom: 20px; text-align: justify;color: red !important">
+                                قابل توجه: در صورتی که کد رفرال خود را به شخص دیگری بدهید و آماده عضو گیری باشید، گارانتی بازگشت وجه شما به طور کامل از بین می‌رود.
+                            </h6>
+                           
+                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                                <input type="checkbox" name="garantee" id="garantee" style="width: 20px; height: 20px; margin: 0;">
+                                <label for="garantee" style="font-size: 14px; color: #333;">
+                                    می پذیرم و نمایش کد رفرال
+                                </label>
+                            </div>
+                            <button name="sub_garantee" style="padding: 10px 20px; font-size: 14px; color: #fff; background-color: #007bff; border: none; border-radius: 4px; cursor: pointer;">
+                                تایید
+                            </button>
+                        </form>
+                    <?php
+                    }
+                    ?>
+
 
                     
                 </div>
 
                 <?php
+
                 if($admin == 0){
                     ?>
                 
                 <div class="col-md-7">
+                    
                     <div class="table-responsive">
                         <table class="table table-bordered">
                             <thead>
@@ -299,10 +326,7 @@ $confirm = $_SESSION['user_data']['confirm'];
                      
                         // نمایش درخت
                         function display_tree($user_id, $conn, $level = 1, $admin = 0) {
-                            // محدود کردن به 4 سطح فقط برای کاربران عادی
-                            if ($level > 4 && $admin == 0) {
-                                return; // توقف بازگشت
-                            }
+                           
 
                             // دریافت اطلاعات کاربر
                             $sql = "SELECT * FROM user WHERE id = " . $user_id;
@@ -361,8 +385,8 @@ $confirm = $_SESSION['user_data']['confirm'];
 
                         // نمایش درخت
                         function display_tree($user_id, $conn, $level = 1) {
-                            // محدود کردن به 4 سطح
-                            if ($level > 4) {
+                            // محدود کردن به 4 سطح فقط برای کاربران عادی
+                            if ($level > 4 ) {
                                 return; // توقف بازگشت
                             }
 
@@ -521,6 +545,52 @@ if(isset($_POST['submit_confirm'])){
                 setTimeout(function(){
                     window.location.href = 'user';
                 }, 3000);
+            });
+        </script>";
+    }
+}
+
+if(isset($_POST['sub_garantee'])){
+    $id_user = $id ;
+    $update = "UPDATE user SET garantee = 0 WHERE id = $id_user";
+    if ($conn->query($update) === TRUE) {
+        echo "<div id='successToast' class='toast' role='alert' aria-live='assertive' aria-atomic='true' data-delay='3000' style='position: fixed; bottom: 20px; right: 20px; width: 300px;'>
+        <div class='toast-header bg-success text-white'>
+            <strong class='mr-auto'>Success</strong>
+        </div>
+        <div class='toast-body'>
+             با موفقیت انجام شد!
+        </div>
+        </div>
+        <script>
+            $(document).ready(function(){
+                $('#successToast').toast({
+                    autohide: true,
+                    delay: 1000
+                }).toast('show');
+                setTimeout(function(){
+                    window.location.href = 'user';
+                }, 1000);
+            });
+        </script>";
+    }else{
+        echo "<div id='errorToast' class='toast' role='alert' aria-live='assertive' aria-atomic='true' data-delay='3000' style='position: fixed; bottom: 20px; right: 20px; width: 300px;'>
+        <div class='toast-header bg-danger text-white'>
+            <strong class='mr-auto'>Error</strong>
+        </div>
+        <div class='toast-body'>
+            خطایی رخ داده، دوباره امتحان کنید!<br>Error: " . htmlspecialchars($stmt->error) . "
+        </div>
+        </div>
+        <script>
+            $(document).ready(function(){
+                $('#errorToast').toast({
+                    autohide: true,
+                    delay: 1000
+                }).toast('show');
+                setTimeout(function(){
+                    window.location.href = 'user';
+                }, 1000);
             });
         </script>";
     }

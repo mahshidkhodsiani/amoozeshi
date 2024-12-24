@@ -101,59 +101,61 @@ $admin = $_SESSION['user_data']['admin'];
 
             <div class="row mt-5">
                 <div class="col-md-7" style="text-align: right !important;">
-                    <table class="table border text-center">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">نام و نام خانوادگی</th>
-                                <th scope="col">ادمین</th>
-                                <th scope="col">عملیات</th>
-                                <th scope="col">ویرایش اطلاعات کاربر</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $a = $offset + 1; // Record number starts based on offset
-                            if ($result->num_rows > 0) {
-                                while ($row = $result->fetch_assoc()) {
-                                ?>
-                                    <tr>
-                                        <th scope="row"><?= $a ?></th>
-                                        <td><?= $row['name'] . " " . $row['family'] ?></td>
-                                        <td><?= $row['admin'] ?></td>
-                                        <td>
-                                            <form action="" method="POST">
-                                                <input type="hidden" name="user_id" value="<?= $row['id'] ?>" />
-                                                <button class="btn btn-danger btn-sm" name="delete" onclick="confirmDelete()">حذف</button>
-                                                <?php
-                                                if($row['confirm'] == 0) {
-                                                ?>
-                                                    <button class="btn btn-success btn-sm" name="confirm">تایید دوره ها</button>
-                                                <?php
-                                                }else{
-                                                    echo "تایید شده" ;
-                                                }
-                                                ?>
-                                            </form>
-                                        </td>
-                                        <td>
-                                            <a href="edit_user.php?id_user=<?= $row['id'] ?>" class="btn btn-primary btn-sm">ادیت</a>
-                                        </td>
-                                    </tr>
-
-                                    <script>
-                                        function confirmDelete() {
-                                            return confirm("آیا مطمئن هستید که می‌خواهید این کاربر را حذف کنید؟");
-                                        }
-                                    </script>
-
+                    <div class="table-responsive">
+                        <table class="table border text-center">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">نام و نام خانوادگی</th>
+                                    <th scope="col">ادمین</th>
+                                    <th scope="col">عملیات</th>
+                                    <th scope="col">ویرایش اطلاعات کاربر</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                                 <?php
-                                    $a++;
+                                $a = $offset + 1; // Record number starts based on offset
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                    ?>
+                                        <tr>
+                                            <th scope="row"><?= $a ?></th>
+                                            <td><?= $row['name'] . " " . $row['family'] ?></td>
+                                            <td><?= $row['admin'] ?></td>
+                                            <td>
+                                                <form action="" method="POST">
+                                                    <input type="hidden" name="user_id" value="<?= $row['id'] ?>" />
+                                                    <button class="btn btn-danger btn-sm" name="delete" onclick="confirmDelete()">حذف</button>
+                                                    <?php
+                                                    if($row['confirm'] == 0) {
+                                                    ?>
+                                                        <button class="btn btn-success btn-sm" name="confirm">تایید دوره ها</button>
+                                                    <?php
+                                                    }else{
+                                                        echo "تایید شده" ;
+                                                    }
+                                                    ?>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <a href="edit_user.php?id_user=<?= $row['id'] ?>" class="btn btn-primary btn-sm">ادیت</a>
+                                            </td>
+                                        </tr>
+
+                                        <script>
+                                            function confirmDelete() {
+                                                return confirm("آیا مطمئن هستید که می‌خواهید این کاربر را حذف کنید؟");
+                                            }
+                                        </script>
+
+                                    <?php
+                                        $a++;
+                                    }
                                 }
-                            }
-                            ?>
-                        </tbody>
-                    </table>
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
