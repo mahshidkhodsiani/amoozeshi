@@ -1,78 +1,94 @@
+<?php
+session_start();
+
+if(!isset($_SESSION['user_data'])){
+    header('location: login.php');
+    exit();
+}
+$id = $_SESSION['user_data']['id'];
+// echo "my user id :". $id;
+$admin = $_SESSION['user_data']['admin'];
+$confirm = $_SESSION['user_data']['confirm'];
+
+?>
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="fa" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Responsive Sidebar RTL</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    /* Sidebar */
-    .sidebar {
-      position: fixed;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      width: 250px;
-      background-color: #343a40;
-      color: white;
-      transition: all 0.3s ease;
-      padding-top: 60px;
-    }
-    .sidebar a {
-      color: white;
-      padding: 15px;
-      text-decoration: none;
-      display: block;
-      font-size: 18px;
-    }
-    .sidebar a:hover {
-      background-color: #575757;
-    }
-    .sidebar .active {
-      background-color: #28a745;
-    }
-    .sidebar .close-btn {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      color: white;
-      font-size: 24px;
-      cursor: pointer;
-    }
-    /* Mobile responsive styles */
-    @media (max-width: 768px) {
-      .sidebar {
-        transform: translateX(100%);
-        z-index: 999;
-      }
-      .sidebar.show {
-        transform: translateX(0);
-      }
-    }
-    .content {
-      margin-right: 250px;
-      padding: 20px;
-    }
-    @media (max-width: 768px) {
-      .content {
-        margin-right: 0;
-      }
-    }
-  </style>
+  <title>صفحه کاربری</title>
+  <link rel="stylesheet" href="css/mainstyles.css">
+
+
+
 </head>
-<body dir="rtl">
-  
+<body>
 
-  
+    <?php
+    include "sidebar.php"; 
+    include "includes.php";  
+    include "config.php";
+    ?>
 
-  
-  <script>
-    // Toggle sidebar on small screens
-    function toggleSidebar() {
-      document.getElementById("sidebar").classList.toggle("show");
-    }
-  </script>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Main content -->
+  <div class="content">
+    <?php include "header.php"; ?>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="container">
+            <div class="row">
+                <h2>پروفایل من</h2>
+            </div>
+
+         
+            <div class="row mt-5 ">
+ 
+
+
+               
+            </div>
+           
+
+
+
+              <div class="col-md-5">
+                  <h2 style="color: green;">درخت ارجاع</h2>
+                  <br>
+
+                  <?php
+                  include "class-tree.php";
+                      // استفاده از کلاس
+                  // $conn باید به یک اتصال معتبر دیتابیس MySQL اشاره کند
+                  $tree = new UserTree($conn);
+                  echo '<div class="tree">';
+                  $tree->displayTree($id); // شناسه کاربر شروع
+                  echo '</div>';
+                  ?>
+              </div>
+       
+           
+
+
+            
+        </div>
+    </div>
+
+  </div>
+
+    <script>
+        function toggleInvited(id) {
+            var element = document.getElementById("invited-" + id);
+            if (element.style.display === "none") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+    </script>
+
+    
+
 </body>
 </html>
